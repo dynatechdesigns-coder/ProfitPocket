@@ -15,10 +15,11 @@ function Expenses() {
   const [submitting, setSubmitting] = useState(false);
 
   const token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const fetchExpenses = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/expenses", {
+      const res = await fetch(`${API_URL}/api/expenses`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -39,7 +40,7 @@ function Expenses() {
     setSubmitting(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/expenses", {
+      const res = await fetch(`${API_URL}/api/expenses`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +78,7 @@ function Expenses() {
     if (!window.confirm("Delete this expense?")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/expenses/${id}`, {
+      const res = await fetch(`${API_URL}/api/expenses/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

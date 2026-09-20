@@ -48,6 +48,7 @@ function Reports() {
   const [loading, setLoading] = useState(true);
 
   const token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchReport = async () => {
@@ -55,7 +56,7 @@ function Reports() {
       try {
         const { startDate, endDate } = getDateRange(range);
         const res = await fetch(
-          `http://localhost:5000/api/reports/profit-loss?startDate=${startDate}&endDate=${endDate}`,
+          `${API_URL}/api/reports/profit-loss?startDate=${startDate}&endDate=${endDate}`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         const data = await res.json();

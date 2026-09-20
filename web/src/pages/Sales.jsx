@@ -13,14 +13,15 @@ function Sales() {
   const [submitting, setSubmitting] = useState(false);
 
   const token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const fetchData = async () => {
     try {
       const [salesRes, productsRes] = await Promise.all([
-        fetch("http://localhost:5000/api/sales", {
+        fetch(`${API_URL}/api/sales`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
-        fetch("http://localhost:5000/api/products", {
+        fetch(`${API_URL}/api/products`, {
           headers: { Authorization: `Bearer ${token}` },
         }),
       ]);
@@ -46,7 +47,7 @@ function Sales() {
     setSubmitting(true);
 
     try {
-      const res = await fetch("http://localhost:5000/api/sales", {
+      const res = await fetch(`${API_URL}/api/sales`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,7 +83,7 @@ function Sales() {
     if (!window.confirm("Delete this sale? Inventory will be restored.")) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/sales/${id}`, {
+      const res = await fetch(`${API_URL}/api/sales/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });

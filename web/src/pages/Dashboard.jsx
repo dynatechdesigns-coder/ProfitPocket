@@ -14,18 +14,19 @@ function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   const token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchStats = async () => {
       try {
         const [productsRes, salesRes, expensesRes] = await Promise.all([
-          fetch("http://localhost:5000/api/products", {
+          fetch(`${API_URL}/api/products`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch("http://localhost:5000/api/sales", {
+          fetch(`${API_URL}/api/sales`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
-          fetch("http://localhost:5000/api/expenses", {
+          fetch(`${API_URL}/api/expenses`, {
             headers: { Authorization: `Bearer ${token}` },
           }),
         ]);
