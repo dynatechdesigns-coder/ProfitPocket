@@ -167,7 +167,7 @@ function Sales() {
         </form>
       )}
 
-      <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+      <div className="bg-white rounded-xl border border-gray-200 overflow-x-auto">
         {loading ? (
           <p className="p-6 text-gray-500">Loading sales...</p>
         ) : sales.length === 0 ? (
