@@ -40,6 +40,15 @@ app.get("/", (req, res) => {
   res.json({ status: "ok", message: "ProfitPocket backend is running" });
 });
 
+app.get("/api/health", (req, res) => {
+  const states = ["disconnected", "connected", "connecting", "disconnecting"];
+  res.json({
+    mongo: states[mongoose.connection.readyState] || "unknown",
+    mongoUriSet: Boolean(process.env.MONGODB_URI),
+    jwtSecretSet: Boolean(process.env.JWT_SECRET),
+  });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
